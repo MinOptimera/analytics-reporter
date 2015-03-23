@@ -24,7 +24,8 @@ var Analytics = require("../analytics"),
     async = require("async"),
     csv = require("fast-csv"),
     zlib = require('zlib'),
-    globalTunnel = require('global-tunnel');
+    tunnel = require('tunnel'),
+    http = require('http');
 
 
 // AWS credentials are looked for in env vars or in ~/.aws/config.
@@ -57,10 +58,13 @@ var run = function(options) {
   if (options.debug) options.verbose = options.debug;
   if (options.verbose) options.debug = options.verbose;
   if (options.proxy) {
-    globalTunnel.initialize({
-      host: options.proxy,
-      port: 8080
+    var tunnelingAgent = tunnel.httpOverHttp({
+      proxy: { // Proxy settings
+        host: options.proxy, // Defaults to 'localhost'
+        port: 8080, // Defaults to 80
+      }
     });
+    http.globalAgent = tunnelingAgent;
   }
 
   // can be overridden to only do one report

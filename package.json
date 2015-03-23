@@ -51,10 +51,10 @@
     "async": "*",
     "aws-sdk": "*",
     "fast-csv": "*",
-    "global-tunnel": "^1.2.0",
     "googleapis": "^1.0.21",
     "minimist": "*",
-    "node-schedule": "^0.1.13"
+    "node-schedule": "^0.1.13",
+    "tunnel": "0.0.3"
   },
   "devDependencies": {
     "body-parser": "~1.8.1",
