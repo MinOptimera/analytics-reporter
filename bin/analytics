@@ -23,7 +23,8 @@ var Analytics = require("../analytics"),
     path = require('path'),
     async = require("async"),
     csv = require("fast-csv"),
-    zlib = require('zlib');
+    zlib = require('zlib'),
+    globalTunnel = require('global-tunnel');
 
 
 // AWS credentials are looked for in env vars or in ~/.aws/config.
@@ -55,6 +56,9 @@ var run = function(options) {
   if (!options) options = {};
   if (options.debug) options.verbose = options.debug;
   if (options.verbose) options.debug = options.verbose;
+  if (options.proxy) {
+    globalTunnel.initialize();
+  }
 
   // can be overridden to only do one report
   var names;
