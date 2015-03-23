@@ -57,7 +57,10 @@ var run = function(options) {
   if (options.debug) options.verbose = options.debug;
   if (options.verbose) options.debug = options.verbose;
   if (options.proxy) {
-    globalTunnel.initialize();
+    globalTunnel.initialize({
+      host: options.proxy,
+      port: 8080
+    });
   }
 
   // can be overridden to only do one report
