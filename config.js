@@ -7,6 +7,8 @@ module.exports = {
 
   debug: (process.env.ANALYTICS_DEBUG ? true : false),
 
+  proxy: process.env.ANALYTICS_PROXY,
+
   /*
     AWS S3 information.
 

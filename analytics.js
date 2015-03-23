@@ -9,6 +9,10 @@ var googleapis = require('googleapis'),
 
 var config = require('./config');
 
+if(config.proxy){
+    googleapis.options({ proxy: config.proxy });
+}
+
 var jwt = new googleapis.auth.JWT(
     config.email,
     config.key,
