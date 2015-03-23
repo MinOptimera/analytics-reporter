@@ -148,21 +148,23 @@ var Analytics = {
         delete result.query.ids;
 
         // Calculate each individual data point.
-        for (var i=0; i<data.rows.length; i++) {
-            var row = data.rows[i];
+        if(data.rows){
+            for (var i=0; i<data.rows.length; i++) {
+                var row = data.rows[i];
 
-            var point = {};
-            for (var j=0; j<row.length; j++) {
-                var field = Analytics.mapping[data.columnHeaders[j].name];
-                var value = row[j];
+                var point = {};
+                for (var j=0; j<row.length; j++) {
+                    var field = Analytics.mapping[data.columnHeaders[j].name];
+                    var value = row[j];
 
-                if (field == "date")
-                    value = Analytics.date_format(value);
+                    if (field == "date")
+                        value = Analytics.date_format(value);
 
-                point[field] = value;
+                    point[field] = value;
+                }
+
+                result.data.push(point);
             }
-
-            result.data.push(point);
         }
 
         // Go through those data points to calculate totals.
